@@ -1,5 +1,5 @@
-import Donation from '../../models/donation';
-import connectMongo from '../../lib/dbConnect';
+import Donation from '../../../models/donation';
+import connectMongo from '../../../lib/dbConnect';
 
 export default async function handler(req, res) {
   await connectMongo();

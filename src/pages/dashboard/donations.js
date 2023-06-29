@@ -1,6 +1,6 @@
 // next
 import Head from 'next/head';
-import { Box, Button, Card, Container, Divider, Link, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, Container, Divider, Link, Modal, Stack, Typography } from '@mui/material';
 // layouts
 import DashboardLayout from '../../layouts/dashboard';
 // components
@@ -76,7 +76,7 @@ export default function PageThree() {
                 </Box>
 
                 <Typography variant="subtitle1" sx={{ mt: 2, mb: 0.5 }}>
-                  <Link href={`/dashboard/donation/${value._id}`}>{value.name}</Link>
+                  <Link href={`/dashboard/donation/${value._id}`}>{value.title}</Link>
                 </Typography>
 
                 <Typography variant="body2" sx={{ color: 'text.secondary', py: 3 }}>
@@ -127,4 +127,10 @@ export default function PageThree() {
       </Container>
     </>
   );
+}
+
+const popUp = () => {
+  <Modal open={true} onClose={() => {}}>
+    <div>hello</div>
+  </Modal>
 }

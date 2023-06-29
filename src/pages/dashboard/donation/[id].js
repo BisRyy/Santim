@@ -65,8 +65,6 @@ export default function PageThree() {
           <Image alt="cover" src={'/assets/images/about/hero.jpg'} ratio="16/9" />
         </Box>
         <Typography gutterBottom>Donation Page</Typography>
-
-        
       </Container>
     </>
   );

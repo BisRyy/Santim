@@ -65,6 +65,9 @@ const CreateDonation = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        // pop up a message
+        alert('Donation created successfully');
+        // redirect to donations page
         router.push('/dashboard/donations');
       })
       .catch(console.log);

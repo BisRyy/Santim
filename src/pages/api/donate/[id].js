@@ -1,6 +1,11 @@
 import SantimpaySdk from '../../../lib';
 import Donation from '../../../models/donation';
 import connectMongo from '../../../lib/dbConnect';
+const ObjectId = require('mongodb').ObjectId;
+
+const objectId = new ObjectId('649cf143d3d1d860d9fc23e3');
+const id = objectId.toString();
+
 export default async function handler(req, res) {
   await connectMongo();
   const { method } = req;
@@ -11,10 +16,19 @@ export default async function handler(req, res) {
 
   if (req.method == 'POST') {
     try {
-      const donations = await Donation.find({});
-      console.log(donations);
-      const donation = donations.find((donation) => donation._id == id) || null;
-      if (!donation) {
+      const donations = await Donation.find();
+      let data;
+      for (let i = 0; i < donations.length; i++) {
+        let newid = new String(donations[i]._id);
+        cont = 0;
+        for (i = 0; i < newid.length; i++) {
+          if (newid[i] === id[i]) {
+            cont++;
+          }
+        }
+      }
+      console.log('data: ', data);
+      if (!donations) {
         return res.status(400).json({ success: false });
       }
       const PRIVATE_KEY_IN_PEM = `-----BEGIN EC PRIVATE KEY-----\nMHcCAQEEII0qPPByHBzW3znAladzC0uQDi6vhgctF/r6NYlN4ftmoAoGCCqGSM49\nAwEHoUQDQgAE4zghgXLQRJWd56Fe282IVNChD+oa8cNdSAZ6DaELdExs2lKmjXeS\nxU/A8YCNg1GqgfrrLcx3eHnI+Qm6+ppgng==\n-----END EC PRIVATE KEY-----\n`;
@@ -34,22 +48,22 @@ export default async function handler(req, res) {
       client
         .generatePaymentUrl(
           id,
-          10,
-          'Payment for a coffee',
+          amount,
+          'Donation',
           successRedirectUrl,
           failureRedirectUrl,
           notifyUrl,
-          '+251925698349'
+          phone
         )
         .then((url) => {
           // redirect user to url to process payment
           console.log('Payment URL: ', url);
           console.log('id: ', id);
+          res.status(200).json({ success: true, data: url });
         })
         .catch((error) => {
           console.error(error);
         });
-      res.status(200).json({ success: true, data: url });
     } catch (error) {
       res.status(400).json({ success: false });
     }
