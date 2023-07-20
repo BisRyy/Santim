@@ -18,14 +18,6 @@ PageThree.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
 export default function PageThree() {
   const { themeStretch } = useSettingsContext();
-
-  // const data = [
-  //   { id: 1,name: 'Hager', description: 'shjdhsjdhsj', image: '/assets/images/about/hero.jpg' },
-  //   { id: 2,name: 'Hager', description: 'shjdhsjdhsj', image: '/assets/images/about/testimonials.jpg' },
-  //   { id: 3,name: 'Hager', description: 'shjdhsjdhsj', image: '/assets/images/about/vision.jpg' },
-  //   { id: 4,name: 'Hager', description: 'shjdhsjdhsj', image: '/assets/images/about/what_1.jpg' },
-  // ];
-  
   const [data, setData] = useState([]);
   
   const fetchData = async () => {
